@@ -1,2 +1,2 @@
-# discord-bot
-A Discord Bot with basic commands.
+# fliggy-worker
+The Worker for Fliggy Bot.
