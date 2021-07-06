@@ -1,8 +1,16 @@
-function handle(message) {
+const { MessageButton } = require("discord-buttons");
+
+const button = new MessageButton()
+  .setStyle('url')
+  .setURL('https://bit.ly/3ypBhtG') 
+  .setLabel('Whoosh!'); 
+
+function handle(message, args) {
   message.reply({
+    button,
     embed: {
-      description: `Click the link below for Fliggy to join your server!\n**<https://bit.ly/3ypBhtG>**\n`,
-      color: "#d6bebe",
+      description: `Just a few steps away from having **Fliggy** online!\n`,
+      color: "#d6bebe"
     }
   })
 }

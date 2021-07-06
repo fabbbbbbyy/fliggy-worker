@@ -1,16 +1,18 @@
 const commands = require("require-all")(`${__dirname}/../`);
 const helpers = require("require-all")(`${__dirname}/help`);
+const helpError = require("../../errors/_help");
 
 async function handle(message, args) {
   const helpersList = Object.keys(helpers);
   const commandsList = {
     core: [],
-    fun: []
+    fun: [],
+    search: []
   };
-  
+
   // Handling the case for specific help commands.
-  if (args.split(" ").length > 1) {
-    let commandWord = args.split(" ")[1];
+  if (args.length > 0 && args.split(" ").length >= 1) {
+    let commandWord = args.split(" ")[0];
 
     const commandToAliasMap = {};
     // Getting all the aliases, and mapping them to their respective command words.
@@ -39,12 +41,15 @@ async function handle(message, args) {
     if (helpersList.includes(`_${commandWord}`)) {
       message.reply(helpers[`_${commandWord}`].helpMessage());
       return;
+    } else {
+      message.reply(helpError.errorMessage());
+      return;
     }
   }
 
   // Handling the case for specific help commands.
-  if (args.split(" ").length > 1) {
-    let commandWord = args.split(" ")[1];
+  if (args.length > 0 && args.split(" ").length >= 1) {
+    let commandWord = args.split(" ")[0];
 
     const commandToAliasMap = {};
     // Getting all the aliases, and mapping them to their respective command words.
@@ -72,6 +77,9 @@ async function handle(message, args) {
 
     if (helpersList.includes(`_${commandWord}`)) {
       message.reply(helpers[`_${commandWord}`].helpMessage());
+      return;
+    } else {
+      message.reply(helpError.errorMessage());
       return;
     }
   }
@@ -100,6 +108,13 @@ async function handle(message, args) {
           {
             name: ":information_source: Core",
             value: `\`${commandsList.core.join(
+              "` `"
+            )}\`\n`,
+            inline: true
+          },
+          {
+            name: ":question: Search",
+            value: `\`${commandsList.search.join(
               "` `"
             )}\`\n`,
             inline: true

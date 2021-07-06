@@ -6,6 +6,8 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
+require("discord-buttons")(client);
+
 const path = require('path');
 const fs = require('fs');
 const dirPath = path.resolve(__dirname, './plugins');
@@ -50,14 +52,22 @@ client.once("ready", () => {
     logger.info(`Fliggy Worker is up, running and working hard!`)
 })
 
-client.on("message", message => {
+client.on("message", async message => {
     if (!message.content.startsWith(process.env.STANDARD_PREFIX) || message.author.bot) {
         return;
     }
 
-    const args = message.content.split(process.env.STANDARD_PREFIX)[1];
+    const afterPrefix = message.content.split(process.env.STANDARD_PREFIX)[1];
 
-    const command = args.toLowerCase().split(" ")[0];
+    const splitArgs = afterPrefix.toLowerCase().split(" ");
+    const command = splitArgs[0];
+
+    let args = "";
+    for (let i = 1; i < splitArgs.length; i++) {
+        args += splitArgs[i] + " ";
+    }
+    args = args.trim();
+    
     client.commands.get(command).handle(message, args);
 })
 

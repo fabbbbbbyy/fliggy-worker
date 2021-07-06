@@ -1,6 +1,9 @@
 const emojis = {
+    exclaimationEmoji: {
+        main: "❗"
+    },
     infoEmoji: {
-        main: ":information_source:"
+        main: "ℹ️"
     }
 };
 
