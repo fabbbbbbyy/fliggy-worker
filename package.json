@@ -25,6 +25,7 @@
     "nodemon": "^2.0.9",
     "pino": "^6.11.3",
     "pino-pretty": "^5.1.0",
+    "puppeteer": "^10.1.0",
     "request": "^2.88.2",
     "require-all": "^3.0.0"
   }
