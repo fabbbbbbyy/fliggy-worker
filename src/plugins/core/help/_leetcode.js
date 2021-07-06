@@ -12,7 +12,7 @@ function helpMessage() {
       fields: [
         {
           name: `***Examples***`,
-          value: `\`f!leetcode\`\n Randomly selects a LeetCode question from an algorithm topic.`,
+          value: `\`f!leetcode\`\n Randomly picks a LeetCode question from an algorithm topic.`,
           inline: true
         },
         {

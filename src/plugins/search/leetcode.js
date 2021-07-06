@@ -191,7 +191,6 @@ async function handle(message, args, client) {
             option += " " + optionArray[i];
         }
     }
-
     
     menu.message.edit("**Because you waited...**", {components: null});
 
