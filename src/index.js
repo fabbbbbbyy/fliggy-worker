@@ -68,7 +68,11 @@ client.on("message", async message => {
     }
     args = args.trim();
     
-    client.commands.get(command).handle(message, args);
+    client.commands.get(command).handle(message, args, client);
 })
 
 client.login(process.env.BOT_TOKEN);
+
+module.exports = {
+    client
+};
