@@ -25,7 +25,7 @@ function helpMessage() {
           value: `___stackexchange___`
         }
       ],
-      color: "#d6bebe"
+      color: 9160786
     }
   };
 }

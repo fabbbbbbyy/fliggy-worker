@@ -21,7 +21,7 @@ function helpMessage() {
           inline: true
         }
       ],
-      color: "#d6bebe"
+      color: 9160786
     }
   };
 }

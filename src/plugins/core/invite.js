@@ -10,7 +10,7 @@ function handle(message, args) {
     button,
     embed: {
       description: `Just a few steps away from having **Fliggy** online!\n`,
-      color: "#d6bebe"
+      color: 9160786
     }
   })
 }
