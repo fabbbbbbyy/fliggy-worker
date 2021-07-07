@@ -151,7 +151,7 @@ async function handle(message, args, client) {
 
     async function loadPage() {
       try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
         const [page] = await browser.pages();
 
         await page.goto(`${apiKey}${menuValue}/`, {
