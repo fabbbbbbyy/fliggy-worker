@@ -1,9 +1,9 @@
 const request = require("request");
-const correctUsageError = require("../../errors/_correctusage");
+const usageError = require("../../errors/_correctusage");
 
 function handle(message, args) {
   if (!args) {
-    return message.reply(correctUsageError.errorMessage("stackoverflow"));
+    return message.reply(usageError.errorMessage("stackoverflow"));
   }
 
   const apikey = process.env.STACKOVERFLOW_API;
@@ -41,7 +41,7 @@ function handle(message, args) {
         embed: {
           description: `Here are your search results for **"${args}"**!\n`,
           url: "https://www.stackoverflow.com",
-          color: "#d6bebe",
+          color: 9160786,
           author: {
             name: "StackOverflow",
             url: "https://www.stackoverflow.com",

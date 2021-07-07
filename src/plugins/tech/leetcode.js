@@ -4,8 +4,13 @@ const {
   MessageMenu,
   MessageMenuOption,
 } = require("discord-buttons");
+const usageError = require("../../errors/_correctusage");
 
 async function handle(message, args, client) {
+  if (args) {
+    return message.reply(usageError.errorMessage("leetcode"));
+  }
+
   const Option1 = new MessageMenuOption()
     .setLabel("Arrays")
     .setDescription("Hurray for arrays!")
@@ -140,7 +145,7 @@ async function handle(message, args, client) {
 
   const Row1 = new MessageActionRow().addComponent(Menu);
 
-  await message.reply("\`The command does take a bit of time to gather the best questions for you.\`", { components: [Row1] });
+  await message.reply("\`Please give the command some time after selecting an option.\`", { components: [Row1] });
 
   client.on("clickMenu", async (menu) => {
     menu.reply.defer();
@@ -200,7 +205,7 @@ async function handle(message, args, client) {
         embed: {
             description: `A special LeetCode question, just for you.\n`,
             url: "https://www.leetcode.com",
-            color: "#d6bebe",
+            color: 9160786,
             author: {
               name: `LeetCode Topic - ${option}`,
               url: "https://www.leetcode.com",
