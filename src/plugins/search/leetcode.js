@@ -1,5 +1,4 @@
 const puppeteer = require("puppeteer");
-const request = require("request");
 const {
   MessageActionRow,
   MessageMenu,
@@ -215,88 +214,6 @@ async function handle(message, args, client) {
     });
   });
 }
-
-// function handle(message, args) {
-//   const apikey = process.env.LEETCODE_API;
-//   const apiUrl = `${apikey}${encodeURIComponent(args)}`;
-
-//   const loadPage = (async function main() {
-//     try {
-//       const browser = await puppeteer.launch();
-//       const [page] = await browser.pages();
-
-//       await page.goto("https://www.leetcode.com/tag/array/", {
-//         waitUntil: "networkidle0",
-//       });
-//       const data = await page.evaluate(
-//         () => {
-//           const x = document.querySelectorAll("a");
-//           let array = [];
-//           for (let i = 0; i < x.length; i++) {
-//             const nametext = x[i].textContent;
-//             const cleantext = nametext.replace(/\s+/g, " ").trim();
-//             const cleanlink = x[i].href;
-//             if (cleanlink.includes("problems")) {
-//               array.push([cleantext, cleanlink]);
-//             }
-//           }
-//           return array;
-//         }
-//       );
-
-//       console.log(data);
-
-//       await browser.close();
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   })();
-
-// //   const requestBody = {
-// //     uri: apiUrl,
-// //     gzip: true
-// //   }
-
-//   request.get(apiUrl, (error, response, body) => {
-//     if (error) {
-//       return logger.error(`Stackoverflow gave an error: ${error}!`);
-//     }
-//     const results = JSON.parse(body).items;
-//     if (!results)
-//       return message.reply("No results were found for your query.");
-//     if (results.length < 1) {
-//       return message.reply("No results were found for your query.");
-//     } else {
-//       let fields = [];
-//       for (const result of results) {
-//         let tags = "";
-//         for (const tag of result.tags) {
-//           tags += `\`${tag}\` `;
-//         }
-//         tags = tags.trim();
-//         fields.push({
-//           name: result.title,
-//           value: `${result.link}\n __**Tags**__: ${tags}`,
-//           inline: true
-//         })
-//       }
-//       return message.reply({
-//         embed: {
-//           description: `Here are your search results for **"${args}"**!\n`,
-//           url: "https://www.stackoverflow.com",
-//           color: "#d6bebe",
-//           author: {
-//             name: "StackOverflow",
-//             url: "https://www.stackoverflow.com",
-//             icon_url:
-//               "https://cdn.discordapp.com/attachments/861239068401860660/861896249636945961/768px-Stack_Overflow_icon.svg.png"
-//           },
-//           fields: fields
-//         }
-//       })
-//     }
-//   });
-// }
 
 const options = {
   name: "leetcode",
