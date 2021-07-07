@@ -7,7 +7,9 @@ async function handle(message, args) {
   const commandsList = {
     core: [],
     fun: [],
-    search: []
+    search: [],
+    tech: [],
+    music: []
   };
 
   // Handling the case for specific help commands.
@@ -39,11 +41,9 @@ async function handle(message, args) {
     });
 
     if (helpersList.includes(`_${commandWord}`)) {
-      message.reply(helpers[`_${commandWord}`].helpMessage());
-      return;
+      return message.reply(helpers[`_${commandWord}`].helpMessage());
     } else {
-      message.reply(helpError.errorMessage());
-      return;
+      return message.reply(helpError.errorMessage());
     }
   }
 
@@ -76,11 +76,9 @@ async function handle(message, args) {
     });
 
     if (helpersList.includes(`_${commandWord}`)) {
-      message.reply(helpers[`_${commandWord}`].helpMessage());
-      return;
+      return message.reply(helpers[`_${commandWord}`].helpMessage());
     } else {
-      message.reply(helpError.errorMessage());
-      return;
+      return message.reply(helpError.errorMessage());
     }
   }
 
@@ -97,7 +95,7 @@ async function handle(message, args) {
         description:
           "Use the `f!help [command]` to get more help. Example: `f!help ping`.\n",
         url: "https://google.com",
-        color: "#d6bebe",
+        color: 9160786,
         author: {
           name: "Fliggy's Support Centre",
           url: "https://google.com",
@@ -113,8 +111,22 @@ async function handle(message, args) {
             inline: true
           },
           {
-            name: ":question: Search",
-            value: `\`${commandsList.search.join(
+            name: ":musical_keyboard: Music",
+            value: `\`${commandsList.music.join(
+              "` `"
+            )}\`\n`,
+            inline: true
+          },
+          // {
+          //   name: ":question: Search",
+          //   value: `\`${commandsList.search.join(
+          //     "` `"
+          //   )}\`\n`,
+          //   inline: true
+          // },
+          {
+            name: ":technologist: Tech",
+            value: `\`${commandsList.tech.join(
               "` `"
             )}\`\n`,
             inline: true
@@ -122,8 +134,8 @@ async function handle(message, args) {
         ],
         footer: {
           icon_url:
-            "https://cdn.discordapp.com/attachments/861239068401860660/861508155245330442/logo_1.png?size=128",
-          text: "Stay tuned for more commands to come."
+            "https://cdn.discordapp.com/attachments/861239068401860660/862254178637709342/2465301.png?size=128",
+          text: "Do note that the music resume command is currently broken because of library issues on Discord's side."
         }
       }
     })
