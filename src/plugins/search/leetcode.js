@@ -186,11 +186,11 @@ async function handle(message, args, client) {
 
     const optionArray = menuValue.split("-");
 
-    let option = optionArray[0];
+    let option = optionArray[0].charAt(0).toUpperCase() + optionArray[0].slice(1);
 
     if (optionArray.length > 1) {
         for (let i = 1; i < optionArray.length; i++) {
-            option += " " + optionArray[i];
+            option += " " + optionArray[i].charAt(0).toUpperCase() + optionArray[i].slice(1);
         }
     }
     
@@ -198,11 +198,11 @@ async function handle(message, args, client) {
 
     return message.reply({
         embed: {
-            description: `A special LeetCode question on **${option}**, just for you.\n`,
+            description: `A special LeetCode question, just for you.\n`,
             url: "https://www.leetcode.com",
             color: "#d6bebe",
             author: {
-              name: "LeetCode",
+              name: `LeetCode Topic - ${option}`,
               url: "https://www.leetcode.com",
               icon_url:
                 "https://cdn.discordapp.com/attachments/861239068401860660/861983011078406194/LeetCode_logo_black.png"

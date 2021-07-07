@@ -17,7 +17,7 @@ function helpMessage() {
         },
         {
           name: `***Usages***`,
-          value: `\`t!stackoverflow <search terms>\``,
+          value: `\`f!stackoverflow <search terms>\``,
           inline: true
         },
         {

@@ -1,6 +1,11 @@
 const request = require("request");
+const correctUsageError = require("../../errors/_correctusage");
 
 function handle(message, args) {
+  if (!args) {
+    return message.reply(correctUsageError.errorMessage("stackoverflow"));
+  }
+
   const apikey = process.env.STACKOVERFLOW_API;
   const apiUrl = `${apikey}${encodeURIComponent(args)}&site=stackoverflow`;
 
