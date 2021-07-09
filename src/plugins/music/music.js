@@ -124,12 +124,13 @@ async function handle(message, args, client) {
       return message.reply("There are currently no songs in the music queue.");
     }
     showQueue(message, serverQueue);
-  } else if (commandWord === "lyrics") {
-    if (!serverQueue) {
-      return message.reply("There are currently no songs in the music queue.");
-    }
-    showLyrics(message, serverQueue);
-  }
+  } 
+  // else if (commandWord === "lyrics") {
+  //   if (!serverQueue) {
+  //     return message.reply("There are currently no songs in the music queue.");
+  //   }
+  //   showLyrics(message, serverQueue);
+  // }
 
   client.on('voiceStateUpdate', (oldState, newState) => {
     // check if someone connects or disconnects
@@ -258,40 +259,6 @@ const showQueue = (message, serverQueue) => {
   const timeout = "100000";
 
   return pagination(message, pages, emojis, timeout);
-};
-
-const showLyrics = (message, serverQueue) => {
-  if (!message.member.voice.channel) {
-    return message.reply(
-      "You have to be in a **voice channel** to execute this command."
-    );
-  }
-  if (serverQueue.songs.length <= 0) {
-    return message.reply(
-        "There are currently no songs in the music queue."
-      );
-  }
-  
-  let fields = [];
-  let counter = 1;
-  for (const song of serverQueue.songs) {
-      fields.push({
-        name: `**${counter}.** ${song.title}`,
-        value: song.url
-      });
-      counter++;
-  }
-
-  return message.reply({
-    embed: {
-        description: `Here is the current music queue.\n`,
-        color: 9160786,
-        thumbnail: {
-            url: process.env.MASCOT_ICON_URL
-        },
-        fields: fields
-      }
-  })
 };
 
 const options = {
