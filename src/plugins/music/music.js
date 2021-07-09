@@ -1,6 +1,10 @@
+const discord = require("discord.js");
 const ytdl = require("ytdl-core");
 const ytSearch = require("yt-search");
+const pagination = require("discord.js-pagination");
+const lyricsFinder = require("lyrics-finder");
 const usageError = require("../../errors/_correctusage");
+const { radioEmoji, leftEmoji, rightEmoji } = require("../../helpers/emojis");
 
 const queue = new Map();
 
@@ -34,6 +38,9 @@ async function handle(message, args, client) {
   if (commandWord === "play") {
     let song = {};
     const splitArgs = args.split(" ");
+    if (splitArgs.length <= 1) {
+      return message.reply(usageError.errorMessage("music"));
+    }
     let possibleSearchTerms = splitArgs[1];
     for (let i = 2; i < splitArgs.length; i++) {
       possibleSearchTerms += " " + splitArgs[i];
@@ -66,8 +73,7 @@ async function handle(message, args, client) {
         voiceChannel: voiceChannel,
         textChannel: message.channel,
         connection: null,
-        songs: [],
-        isPaused: false
+        songs: []
       };
 
       queue.set(message.guild.id, queueConstructor);
@@ -118,7 +124,22 @@ async function handle(message, args, client) {
       return message.reply("There are currently no songs in the music queue.");
     }
     showQueue(message, serverQueue);
+  } else if (commandWord === "lyrics") {
+    if (!serverQueue) {
+      return message.reply("There are currently no songs in the music queue.");
+    }
+    showLyrics(message, serverQueue);
   }
+
+  client.on('voiceStateUpdate', (oldState, newState) => {
+    // check if someone connects or disconnects
+    if (oldState.channelID === null || typeof oldState.channelID == 'undefined') return;
+    // check if the bot is disconnecting
+    if (newState.id !== client.user.id) return;
+    // clear the queue
+    return queue.delete(oldState.guild.id);
+    
+  });
 }
 
 const videoPlayer = async (guild, song) => {
@@ -137,7 +158,7 @@ const videoPlayer = async (guild, song) => {
       videoPlayer(guild, songQueue.songs[0]);
     });
 
-  await songQueue.textChannel.send(`📻 Now playing **${song.title}**!`);
+  await songQueue.textChannel.send(`${radioEmoji.main} Now playing **${song.title}**!`);
 };
 
 const skipSong = (message, serverQueue) => {
@@ -165,13 +186,12 @@ const pauseSong = async (message, serverQueue) => {
       "You have to be in a **voice channel** to execute this command."
     );
   }
-  if (serverQueue.isPaused) {
+  if (serverQueue.connection.dispatcher.paused) {
     return message.reply(
         "The music track is already paused, did you mean to resume it?"
       );
   }
   serverQueue.connection.dispatcher.pause();
-  serverQueue.isPaused = true;
   return message.reply(
     "Successfully paused Fliggy's stream of music."
   );
@@ -183,19 +203,64 @@ const resumeSong = async (message, serverQueue) => {
           "You have to be in a **voice channel** to execute this command."
         );
       }
-      if (!serverQueue.isPaused) {
+      if (serverQueue.connection.dispatcher.resumed) {
         return message.reply(
             "The music track is not paused, did you mean to pause it?"
           );
       }
       serverQueue.connection.dispatcher.resume();
-      serverQueue.isPaused = false;
       return message.reply(
-        "Successfully resumed Fliggy's stream of music."
+        `Successfully resumed Fliggy's stream of music. \n${radioEmoji.main} Now playing **${serverQueue.songs[0].title}**!`
       );
 };
 
 const showQueue = (message, serverQueue) => {
+  if (!message.member.voice.channel) {
+    return message.reply(
+      "You have to be in a **voice channel** to execute this command."
+    );
+  }
+  if (serverQueue.songs.length <= 0) {
+    return message.reply(
+        "There are currently no songs in the music queue."
+      );
+  }
+
+  let counter = 1;
+  const numEmbeds = Math.ceil(serverQueue.songs.length / 10);
+  const pages = [];
+
+  for (let i = 0; i < numEmbeds; i++) {
+    const fields = [];
+    const startIdx = counter - 1;
+    let endIdx = startIdx + 10;
+    if (i == numEmbeds - 1) {
+      endIdx = serverQueue.songs.length;
+    }
+    for (let j = startIdx; j < endIdx; j++) {
+      fields.push({
+        name: `**${counter}.** ${serverQueue.songs[j].title}`,
+        value: serverQueue.songs[j].url
+      });
+      counter++;
+    }
+    const embed = new discord.MessageEmbed()
+    .setDescription("Here is the current music queue.\n")
+    .setColor(9160786)
+    .setThumbnail("https://cdn.discordapp.com/attachments/861239068401860660/862254178637709342/2465301.png")
+    .addFields(
+      fields
+    );
+    pages.push(embed);
+  }
+
+  const emojis = [leftEmoji.main, rightEmoji.main];
+  const timeout = "100000";
+
+  return pagination(message, pages, emojis, timeout);
+};
+
+const showLyrics = (message, serverQueue) => {
   if (!message.member.voice.channel) {
     return message.reply(
       "You have to be in a **voice channel** to execute this command."
@@ -222,7 +287,7 @@ const showQueue = (message, serverQueue) => {
         description: `Here is the current music queue.\n`,
         color: 9160786,
         thumbnail: {
-            url: "https://cdn.discordapp.com/attachments/861239068401860660/862254178637709342/2465301.png"
+            url: process.env.MASCOT_ICON_URL
         },
         fields: fields
       }
