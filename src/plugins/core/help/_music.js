@@ -3,9 +3,8 @@ function helpMessage() {
     embed: {
       author: {
         name: `Fliggy's Support Centre`,
-        url: "https://google.com",
-        icon_url:
-          "https://cdn.discordapp.com/attachments/861239068401860660/861508682414948362/217-2172859_finish-flag-icon-black-white-flag-icon.png"
+        url: process.env.SUPPORT_SERVER,
+        icon_url: process.env.SUPPORT_ICON_URL
       },
       title: `**f!music**`,
       description: `\`\`\`Searches and plays music through Fliggy. You must be in a voice channel to use this.\`\`\`\n`,
@@ -27,12 +26,7 @@ function helpMessage() {
           inline: true
         }
       ],
-      color: 9160786,
-      footer: {
-        icon_url:
-          "https://cdn.discordapp.com/attachments/861239068401860660/862254178637709342/2465301.png?size=128",
-        text: "Do note that the music resume command is currently broken because of library issues on Discord's side."
-      }
+      color: 9160786
     }
   };
 }

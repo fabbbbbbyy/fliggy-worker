@@ -1,5 +1,6 @@
 const commands = require("require-all")(`${__dirname}/../`);
 const helpers = require("require-all")(`${__dirname}/help`);
+const { infoEmoji, pianoEmoji, technologistEmoji } = require("../../helpers/emojis");
 const helpError = require("../../errors/_help");
 
 async function handle(message, args) {
@@ -94,24 +95,23 @@ async function handle(message, args) {
         // title: "Click here for help, updates & more",
         description:
           "Use the `f!help [command]` to get more help. Example: `f!help ping`.\n",
-        url: "https://google.com",
+        url: process.env.SUPPORT_SERVER,
         color: 9160786,
         author: {
           name: "Fliggy's Support Centre",
-          url: "https://google.com",
-          icon_url:
-            "https://cdn.discordapp.com/attachments/861239068401860660/861508682414948362/217-2172859_finish-flag-icon-black-white-flag-icon.png"
+          url: process.env.SUPPORT_SERVER,
+          icon_url: process.env.SUPPORT_ICON_URL
         },
         fields: [
           {
-            name: ":information_source: Core",
+            name: `${infoEmoji.main} Core`,
             value: `\`${commandsList.core.join(
               "` `"
             )}\`\n`,
             inline: true
           },
           {
-            name: ":musical_keyboard: Music",
+            name: `${pianoEmoji.main} Music`,
             value: `\`${commandsList.music.join(
               "` `"
             )}\`\n`,
@@ -125,7 +125,7 @@ async function handle(message, args) {
           //   inline: true
           // },
           {
-            name: ":technologist: Tech",
+            name: `${technologistEmoji.main} Tech`,
             value: `\`${commandsList.tech.join(
               "` `"
             )}\`\n`,
@@ -133,9 +133,8 @@ async function handle(message, args) {
           }
         ],
         footer: {
-          icon_url:
-            "https://cdn.discordapp.com/attachments/861239068401860660/862254178637709342/2465301.png?size=128",
-          text: "Do note that the music resume command is currently broken because of library issues on Discord's side."
+          icon_url: process.env.MASCOT_ICON_URL,
+          text: "Stay tuned for more commands."
         }
       }
     })

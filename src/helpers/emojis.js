@@ -4,6 +4,21 @@ const emojis = {
     },
     infoEmoji: {
         main: "ℹ️"
+    },
+    leftEmoji: {
+        main: "⬅️"
+    },
+    rightEmoji: {
+        main: "➡️"
+    },
+    pianoEmoji: {
+        main: "🎹"
+    },
+    radioEmoji: {
+        main: "📻"
+    },
+    technologistEmoji: {
+        main: "🧑‍💻"
     }
 };
 
