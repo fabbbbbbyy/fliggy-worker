@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 const { drawCard } = require("discord-welcome-card");
 
 async function loadGuildMemberAddEvent(client, logger, member) {
