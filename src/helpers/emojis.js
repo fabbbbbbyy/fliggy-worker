@@ -8,6 +8,9 @@ const emojis = {
     leftEmoji: {
         main: "⬅️"
     },
+    moneyEmoji: {
+        main: "💰"
+    },
     rightEmoji: {
         main: "➡️"
     },
@@ -19,6 +22,9 @@ const emojis = {
     },
     technologistEmoji: {
         main: "🧑‍💻"
+    },
+    scalesEmoji: {
+        main: "⚖️"
     }
 };
 
