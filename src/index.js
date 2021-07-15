@@ -8,3 +8,9 @@ const logger = require("./logger").child({
 });
 
 Framework(client, logger);
+
+module.exports = {
+    Discord, 
+    client, 
+    logger
+};

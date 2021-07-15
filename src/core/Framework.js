@@ -1,8 +1,9 @@
 const prepareCommandHandler = require("./CommandHandler");
 const prepareEventHandler = require("./EventHandler");
-const DatabaseClient = require("../database/StubClient");
+const connectDB = require("../database/MongoClient");
 
 async function Framework(client, logger) {
+    await connectDB();
     await prepareCommandHandler(client, logger);
     await prepareEventHandler(client, logger);
 

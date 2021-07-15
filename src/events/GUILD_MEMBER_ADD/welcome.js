@@ -1,22 +1,15 @@
-const Discord = require("discord.js");
-const { drawCard } = require("discord-welcome-card");
-
-async function loadGuildMemberAddEvent(client, logger, member) {
-  const image = await drawCard({
-    blur: true,
-    title: `Welcome,`,
-    theme: "dark",
-    text: `${member.user.username}#${member.user.discriminator}.`,
-    subtitle: "Enjoy your stay!",
-    rounded: true,
-    border: true,
-    avatar: member.user.displayAvatarURL({ format: "png" }),
+async function loadWelcomeEvent(client, logger, member) {
+  return member.guild.systemChannel.send({
+    embed: {
+      title: `**${member.user.username}**...`,
+      description:
+        `Welcome to **${member.guild.name}**, we're glad to have you. :european_castle:\n\nTo get started, send \`f!help\`. Each command works this way, for example, \`f!invite\`.\n**Fliggy** helps you and your discord community, featuring:\n:people_wrestling:  **Server Management**\n:computer: **Coding Assistance**\n:man_factory_worker: **Gimmicks & Fun**\n\nDo check out the __[Support Server](https://discord.gg/a29mmbRu)__ :helicopter: as well!`,
+      color: 9160786,
+      thumbnail: {
+        url: "https://cdn.discordapp.com/attachments/861239068401860660/862254178637709342/2465301.png",
+      },
+    },
   });
-  let attachment = new Discord.MessageAttachment(image, "custom.png");
-  const id = await member.guild.systemChannelID;
-  await member.guild.channels.cache
-    .get(id)
-    .send(member.user.toString(), attachment);
 }
 
-module.exports = loadGuildMemberAddEvent;
+module.exports = loadWelcomeEvent;

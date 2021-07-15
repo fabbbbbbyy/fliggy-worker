@@ -25,6 +25,9 @@ const emojis = {
     },
     scalesEmoji: {
         main: "⚖️"
+    },
+    thumbsUpEmoji: {
+        main: "👍"
     }
 };
 
