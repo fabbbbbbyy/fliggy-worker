@@ -1,4 +1,4 @@
-async function loadGuildCreateEvent(client, logger, guild) {
+async function loadIntroEvent(client, logger, guild) {
   return guild.systemChannel.send({
     embed: {
       title: `${guild.name} -- Fliggy Established`,
@@ -12,4 +12,4 @@ async function loadGuildCreateEvent(client, logger, guild) {
   });
 }
 
-module.exports = loadGuildCreateEvent;
+module.exports = loadIntroEvent;

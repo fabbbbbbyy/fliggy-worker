@@ -1,6 +1,6 @@
 const noSuchCommandError = require("../../errors/_nosuchcommand");
 
-async function loadMessageCreateEvent(client, logger, message) {
+async function loadHandleCommandEvent(client, logger, message) {
   if (!message.content.startsWith(process.env.STANDARD_PREFIX) || message.author.bot) {
     return;
   }
@@ -23,4 +23,4 @@ async function loadMessageCreateEvent(client, logger, message) {
   }
 }
 
-module.exports = loadMessageCreateEvent;
+module.exports = loadHandleCommandEvent;
