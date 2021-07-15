@@ -29,6 +29,7 @@
     "ffmpeg-static": "^4.4.0",
     "glob": "^7.1.7",
     "lyrics-finder": "^21.7.0",
+    "mathjs": "^9.4.4",
     "nodemon": "^2.0.9",
     "nvm": "0.0.4",
     "pino": "^6.11.3",
