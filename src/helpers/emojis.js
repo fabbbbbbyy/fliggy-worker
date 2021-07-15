@@ -19,6 +19,9 @@ const emojis = {
     },
     technologistEmoji: {
         main: "🧑‍💻"
+    },
+    thumbsUpEmoji: {
+        main: "👍"
     }
 };
 
