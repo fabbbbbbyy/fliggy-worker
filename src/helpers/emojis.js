@@ -1,4 +1,7 @@
 const emojis = {
+    cheekyEmoji: {
+        main: "🤭"
+    },
     exclaimationEmoji: {
         main: "❗"
     },
