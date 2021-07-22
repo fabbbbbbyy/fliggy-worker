@@ -1,6 +1,6 @@
 const { exclaimationEmoji } = require("../helpers/emojis");
 
-function errorMessage(plugin) {
+function errorMessage(plugin, customError = "") {
   return {
     embed: {
       author: {
@@ -9,7 +9,8 @@ function errorMessage(plugin) {
         icon_url:
           "https://cdn.discordapp.com/attachments/861239068401860660/861508682414948362/217-2172859_finish-flag-icon-black-white-flag-icon.png"
       },
-      description: `${exclaimationEmoji.main} Sorry, please check \`f!help ${plugin}\` for the correct usage. ${exclaimationEmoji.main}\n`,
+      description: `${exclaimationEmoji.main} Sorry, please check \`f!help ${plugin}\` for the correct usage. ${exclaimationEmoji.main}\n
+                    ${customError}`,
       color: 9160786
     }
   };
