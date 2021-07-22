@@ -19,6 +19,7 @@
   "homepage": "https://github.com/fabbbbbbyy/fliggy-worker#readme",
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
+    "axios": "^0.21.1",
     "canvacord": "^5.2.1",
     "discord-buttons": "^4.0.0",
     "discord-canvas": "^1.4.1",
