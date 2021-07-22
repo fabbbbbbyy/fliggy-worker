@@ -17,7 +17,7 @@ async function handleOverview(message, args) {
   const processedArgs = processArgs(args);
 
   if (processedArgs === NO_ARGS) {
-    return message.reply(usageError.errorMessage("stocks"));
+    return message.reply(usageError.errorMessage("stocks", "You have to specify a company symbol/ticker."));
   }
 
   const apiKey = process.env.ALPHA_VANTAGE_API;
@@ -64,6 +64,11 @@ async function handleOverview(message, args) {
 
   const key = Object.keys(results1)[0];
   const innerBody = results1[key];
+
+  if (innerBody && Object.keys(innerBody).length === 0 && innerBody.constructor === Object) {
+    return message.reply(usageError.errorMessage("stocks", `${message.author.username}, try again with a proper company symbol/ticker.`));
+  }
+
   const innerKeys = Object.keys(innerBody);
 
   let sign;

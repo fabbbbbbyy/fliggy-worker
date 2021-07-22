@@ -25,16 +25,17 @@ async function handleOverview(message, args) {
   const requestBody = {
     url: overviewApiUrl,
     json: true,
-    headers: { "User-Agent": "request" }
-  }
+    headers: { "User-Agent": "request" },
+  };
 
-  request.get(
-    requestBody,
-    (error, response, body) => {
-      if (error) {
-        console.log("Error:", error);
-      } else if (response.statusCode !== 200) {
-        console.log("Status:", res.statusCode);
+  request.get(requestBody, (error, response, body) => {
+    if (error) {
+      console.log("Error:", error);
+    } else if (response.statusCode !== 200) {
+      console.log("Status:", res.statusCode);
+    } else {
+      if (body && Object.keys(body).length === 0 && body.constructor === Object) {
+        return message.reply(usageError.errorMessage("stocks", `${message.author.username}, try again with a proper company symbol/ticker.`));
       } else {
         return message.reply({
           embed: {
@@ -87,7 +88,7 @@ async function handleOverview(message, args) {
         });
       }
     }
-  );
+  });
 }
 
 module.exports = handleOverview;
