@@ -1,6 +1,6 @@
 const commands = require("require-all")(`${__dirname}/../`);
 const helpers = require("require-all")(`${__dirname}/help`);
-const { infoEmoji, moneyEmoji, pianoEmoji, technologistEmoji } = require("../../helpers/emojis");
+const { cheekyEmoji, infoEmoji, moneyEmoji, pianoEmoji, technologistEmoji } = require("../../helpers/emojis");
 const helpError = require("../../errors/_help");
 
 async function handle(message, args) {
@@ -114,6 +114,13 @@ async function handle(message, args) {
           {
             name: `${pianoEmoji.main} Music`,
             value: `\`${commandsList.music.join(
+              "` `"
+            )}\`\n`,
+            inline: true
+          },
+          {
+            name: `${cheekyEmoji.main} Fun`,
+            value: `\`${commandsList.fun.join(
               "` `"
             )}\`\n`,
             inline: true

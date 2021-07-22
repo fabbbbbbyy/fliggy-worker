@@ -5,7 +5,10 @@ async function handle(message, args) {
   if (!args) {
     return message.reply(usageError.errorMessage("stocks"));
   }
-  switch (args) {
+  
+  const pluginName = args.split(" ")[0];
+
+  switch (pluginName) {
     case "overview":
       return handleOverview(message, args);
     default:

@@ -6,22 +6,22 @@ function helpMessage() {
         url: process.env.SUPPORT_SERVER,
         icon_url: process.env.SUPPORT_ICON_URL
       },
-      title: `**f!math**`,
-      description: `\`\`\`Used to evaluate math expressions.\`\`\`\n`,
+      title: `**f!stocks**`,
+      description: `\`\`\`Used for anything related to stocks.\`\`\`\n`,
       fields: [
         {
           name: `***Examples***`,
-          value: `\`f!math 10 + 10\`\n calculates 10 + 10, which should evaluate to 20.`,
+          value: `\`f!stocks overview IBM\`\n searches and displays realtime information of IBM stocks.`,
           inline: true
         },
         {
           name: `***Usages***`,
-          value: `\`f!math <math expression>\``,
+          value: `\`f!stocks overview <company symbol>\``,
           inline: true
         },
         {
           name: `***Aliases***`,
-          value: `___calculate___ ___calc___`
+          value: `___stock___`
         }
       ],
       color: 9160786
