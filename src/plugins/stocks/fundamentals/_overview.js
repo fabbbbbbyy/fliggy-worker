@@ -1,7 +1,7 @@
 const request = require("request");
 const usageError = require("../../../errors/_correctusage");
 
-const WRONG_ARGS = "";
+const NO_ARGS = "";
 
 function processArgs(args) {
   const splitArgs = args.split(" ");
@@ -12,87 +12,82 @@ function processArgs(args) {
   }
 }
 
-function getRequest(url) {
-  return new Promise(function (success, failure) {
-    request(url, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        success(body);
-      } else {
-        failure(error);
-      }
-    });
-  });
-}
-
 async function handleOverview(message, args) {
   const processedArgs = processArgs(args);
 
-  if (processedArgs === WRONG_ARGS) {
+  if (processedArgs === NO_ARGS) {
     return message.reply(usageError.errorMessage("stocks"));
   }
 
   const apiKey = process.env.ALPHA_VANTAGE_API;
   const overviewApiUrl = `https://www.alphavantage.co/query?function=OVERVIEW&symbol=${processedArgs}&apikey=${apiKey}`;
-  const priceApiUrl = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${processedArgs}&apikey=${apiKey}`;
 
-  let priceData;
-  let overviewData;
+  const requestBody = {
+    url: overviewApiUrl,
+    json: true,
+    headers: { "User-Agent": "request" }
+  }
 
-  await getRequest(priceApiUrl).then(async (body1) => {
-    priceData = body1;
-    await getRequest(overviewApiUrl);
-  }).then(async (body2) => {
-    overviewData = body2;
-  }).then(() => {
-    return message.reply({
-      embed: {
-        title: ``,
-        description: `\`\`\`${overviewData.Description}\`\`\`\n`,
-        url: process.env.SUPPORT_SERVER,
-        color: 9160786,
-        author: {
-          name: `${overviewData.Symbol} - ${overviewData.Name}`,
-          url: process.env.SUPPORT_SERVER,
-          icon_url: process.env.SUPPORT_ICON_URL
-        },
-        fields: [{
-            name: "___Asset Type:___",
-            value: `\`${overviewData.AssetType}\``,
-            inline: true
+  request.get(
+    requestBody,
+    (error, response, body) => {
+      if (error) {
+        console.log("Error:", error);
+      } else if (response.statusCode !== 200) {
+        console.log("Status:", res.statusCode);
+      } else {
+        return message.reply({
+          embed: {
+            title: ``,
+            description: `\`\`\`${body.Description}\`\`\`\n`,
+            url: process.env.SUPPORT_SERVER,
+            color: 9160786,
+            author: {
+              name: `${body.Symbol} - ${body.Name}`,
+              url: process.env.SUPPORT_SERVER,
+              icon_url: process.env.SUPPORT_ICON_URL,
+            },
+            fields: [
+              {
+                name: "___Asset Type:___",
+                value: `\`${body.AssetType}\``,
+                inline: true,
+              },
+              {
+                name: "___Exchange Market:___",
+                value: `\`${body.Exchange}\``,
+                inline: true,
+              },
+              {
+                name: "___Currency:___",
+                value: `\`${body.Currency}\``,
+                inline: true,
+              },
+              {
+                name: "___Sector:___",
+                value: `\`${body.Sector}\``,
+                inline: true,
+              },
+              {
+                name: "___Industry:___",
+                value: `\`${body.Industry}\``,
+                inline: true,
+              },
+              {
+                name: "___Analyst Target Price:___",
+                value: `\`${body.AnalystTargetPrice}\``,
+                inline: true,
+              },
+            ],
+            footer: {
+              icon_url: process.env.MASCOT_ICON_URL,
+              text: "Stock data is only updated every 5 minutes, and might not be REALTIME data.",
+            },
           },
-          {
-            name: "___Exchange Market:___",
-            value: `\`${overviewData.Exchange}\``,
-            inline: true
-          },
-          {
-            name: "___Currency:___",
-            value: `\`${overviewData.Currency}\``,
-            inline: true
-          },
-          {
-            name: "___Sector:___",
-            value: `\`${overviewData.Sector}\``,
-            inline: true
-          },
-          {
-            name: "___Industry:___",
-            value: `\`${overviewData.Industry}\``,
-            inline: true
-          },
-          {
-            name: "___Analyst Target Price:___",
-            value: `\`${overviewData.AnalystTargetPrice}\``,
-            inline: true
-          }
-        ],
-        footer: {
-          icon_url: process.env.MASCOT_ICON_URL,
-          text: "Stock data is only updated every 5 minutes, and might not be REALTIME data."
-        }
+        });
       }
-    })
-  })
+    }
+  );
 }
 
 module.exports = handleOverview;

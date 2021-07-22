@@ -11,12 +11,13 @@ function helpMessage() {
       fields: [
         {
           name: `***Examples***`,
-          value: `\`f!stocks overview IBM\`\n searches and displays realtime information of IBM stocks.`,
+          value: `\`f!stocks price IBM\`\n searches and displays realtime price of IBM stocks.\n
+          \`f!stocks overview IBM\`\n searches and displays information about the company in charge of IBM.`,
           inline: true
         },
         {
           name: `***Usages***`,
-          value: `\`f!stocks overview <company symbol>\``,
+          value: `\`f!stocks price <company symbol>\` \`f!stocks overview <company symbol>\``,
           inline: true
         },
         {

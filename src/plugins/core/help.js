@@ -86,7 +86,9 @@ async function handle(message, args) {
 
   Object.keys(commands).forEach(category => {
     Object.keys(commands[category]).forEach(cmd => {
-      commandsList[category].push(cmd);
+      if(helpersList.includes(`_${cmd}`)) {
+        commandsList[category].push(cmd);
+      }
     });
   });
 
