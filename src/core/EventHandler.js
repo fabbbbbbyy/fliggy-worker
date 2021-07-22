@@ -1,4 +1,5 @@
 const loadLogEvent = require("../events/READY/log");
+const loadActivityEvent = require("../events/READY/activity");
 const loadHandleCommandEvent = require("../events/MESSAGE_CREATE/handle");
 const loadIntroEvent = require("../events/GUILD_CREATE/intro");
 const loadWelcomeEvent = require("../events/GUILD_MEMBER_ADD/welcome");
@@ -7,6 +8,7 @@ const loadAutoroleEvent = require("../events/GUILD_MEMBER_ADD/autorole");
 async function prepareCommandHandler(client, logger) {
   client.once("ready", () => {
     loadLogEvent(client, logger);
+    loadActivityEvent(client, logger);
   });
 
   client.on("message", async (message) => {

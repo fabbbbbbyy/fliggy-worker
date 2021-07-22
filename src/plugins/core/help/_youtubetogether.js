@@ -7,7 +7,7 @@ function helpMessage() {
         icon_url: process.env.SUPPORT_ICON_URL
       },
       title: `**f!youtubetogether**`,
-      description: `\`\`\`Brings up a Youtube Together session. You must be in a voice channel to use this.\`\`\`\n`,
+      description: `\`\`\`Brings up a Youtube Together sessionY. You must be in a voice channel to use this.\`\`\`\n`,
       fields: [
         {
           name: `***Examples***`,
