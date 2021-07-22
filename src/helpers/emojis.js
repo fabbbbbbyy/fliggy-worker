@@ -2,6 +2,9 @@ const emojis = {
     cheekyEmoji: {
         main: "🤭"
     },
+    downEmoji: {
+        main: "⬇️"
+    },
     exclaimationEmoji: {
         main: "❗"
     },
@@ -31,6 +34,9 @@ const emojis = {
     },
     thumbsUpEmoji: {
         main: "👍"
+    },
+    upEmoji: {
+        main: "⬆️"
     }
 };
 
