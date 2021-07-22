@@ -1,4 +1,7 @@
 const emojis = {
+    cheekyEmoji: {
+        main: "🤭"
+    },
     exclaimationEmoji: {
         main: "❗"
     },
@@ -7,6 +10,9 @@ const emojis = {
     },
     leftEmoji: {
         main: "⬅️"
+    },
+    moneyEmoji: {
+        main: "💰"
     },
     rightEmoji: {
         main: "➡️"
@@ -19,6 +25,9 @@ const emojis = {
     },
     technologistEmoji: {
         main: "🧑‍💻"
+    },
+    scalesEmoji: {
+        main: "⚖️"
     },
     thumbsUpEmoji: {
         main: "👍"

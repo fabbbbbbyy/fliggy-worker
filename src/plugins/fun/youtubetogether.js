@@ -37,7 +37,12 @@ function handle(message, args, client) {
       return message.reply({
         button,
         embed: {
-          description: `Just a few steps away from starting your **Youtube Together** session!\n`,
+          author: {
+            name: "Youtube Together",
+            url: "https://www.youtube.com",
+            icon_url: "https://cdn.discordapp.com/attachments/861239068401860660/865143281368432670/800px-YouTube_full-color_icon_2017.svg.png"
+          },
+          description: `Just a click away from starting your session!\n`,
           color: 9160786,
         },
       });

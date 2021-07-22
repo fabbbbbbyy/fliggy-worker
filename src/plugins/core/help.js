@@ -1,6 +1,6 @@
 const commands = require("require-all")(`${__dirname}/../`);
 const helpers = require("require-all")(`${__dirname}/help`);
-const { infoEmoji, pianoEmoji, technologistEmoji } = require("../../helpers/emojis");
+const { cheekyEmoji, infoEmoji, moneyEmoji, pianoEmoji, technologistEmoji } = require("../../helpers/emojis");
 const helpError = require("../../errors/_help");
 
 async function handle(message, args) {
@@ -10,7 +10,8 @@ async function handle(message, args) {
     fun: [],
     search: [],
     tech: [],
-    music: []
+    music: [],
+    stocks: []
   };
 
   // Handling the case for specific help commands.
@@ -117,6 +118,13 @@ async function handle(message, args) {
             )}\`\n`,
             inline: true
           },
+          {
+            name: `${cheekyEmoji.main} Fun`,
+            value: `\`${commandsList.fun.join(
+              "` `"
+            )}\`\n`,
+            inline: true
+          },
           // {
           //   name: ":question: Search",
           //   value: `\`${commandsList.search.join(
@@ -127,6 +135,13 @@ async function handle(message, args) {
           {
             name: `${technologistEmoji.main} Tech`,
             value: `\`${commandsList.tech.join(
+              "` `"
+            )}\`\n`,
+            inline: true
+          },
+          {
+            name: `${moneyEmoji.main} Stocks`,
+            value: `\`${commandsList.stocks.join(
               "` `"
             )}\`\n`,
             inline: true
