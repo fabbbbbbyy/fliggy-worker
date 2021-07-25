@@ -1,7 +1,7 @@
 const discord = require("discord.js");
 const ytdl = require("ytdl-core");
 const ytSearch = require("yt-search");
-const pagination = require("discord.js-pagination");
+const createMenu = require("../../helpers/pagination");
 const lyricsFinder = require("lyrics-finder");
 const usageError = require("../../errors/_correctusage");
 const { radioEmoji, leftEmoji, rightEmoji } = require("../../helpers/emojis");
@@ -255,10 +255,7 @@ const showQueue = (message, serverQueue) => {
     pages.push(embed);
   }
 
-  const emojis = [leftEmoji.main, rightEmoji.main];
-  const timeout = "100000";
-
-  return pagination(message, pages, emojis, timeout);
+  return createMenu(message, pages);
 };
 
 const options = {
