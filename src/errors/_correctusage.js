@@ -9,8 +9,7 @@ function errorMessage(plugin, customError = "") {
         icon_url:
           "https://cdn.discordapp.com/attachments/861239068401860660/861508682414948362/217-2172859_finish-flag-icon-black-white-flag-icon.png"
       },
-      description: `${exclaimationEmoji.main} Sorry, please check \`f!help ${plugin}\` for the correct usage. ${exclaimationEmoji.main}\n
-                    ${customError}`,
+      description: `${exclaimationEmoji.main} Sorry, please check \`f!help ${plugin}\` for the correct usage. ${exclaimationEmoji.main}\n ${customError}`,
       color: 9160786
     }
   };
