@@ -228,13 +228,13 @@ const showQueue = (message, serverQueue) => {
   }
 
   let counter = 1;
-  const numEmbeds = Math.ceil(serverQueue.songs.length / 10);
+  const numEmbeds = Math.ceil(serverQueue.songs.length / 5);
   const pages = [];
 
   for (let i = 0; i < numEmbeds; i++) {
     const fields = [];
     const startIdx = counter - 1;
-    let endIdx = startIdx + 10;
+    let endIdx = startIdx + 5;
     if (i == numEmbeds - 1) {
       endIdx = serverQueue.songs.length;
     }
