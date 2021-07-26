@@ -3,7 +3,7 @@ const { leftEmoji, rightEmoji } = require("./emojis");
 
 function createMenu(message, pages) {
   const emojis = [leftEmoji.main, rightEmoji.main];
-  const timeout = "100000";
+  const timeout = "60000";
   return pagination(message, pages, emojis, timeout);
 }
 
