@@ -127,13 +127,13 @@ async function handle(message, args) {
             )}\`\n`,
             inline: true
           },
-          // {
-          //   name: ":question: Search",
-          //   value: `\`${commandsList.search.join(
-          //     "` `"
-          //   )}\`\n`,
-          //   inline: true
-          // },
+          {
+            name: ":question: Search",
+            value: `\`${commandsList.search.join(
+              "` `"
+            )}\`\n`,
+            inline: true
+          },
           {
             name: `${technologistEmoji.main} Tech`,
             value: `\`${commandsList.tech.join(
